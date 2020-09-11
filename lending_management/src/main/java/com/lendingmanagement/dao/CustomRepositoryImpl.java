@@ -15,16 +15,18 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class CustomRepositoryImpl implements CustomRepository {
 
-	private static final String QUERY_GET_EXPIRED = "SELECT u.* FROM user.user AS u";
-	private static final String QUERY_SAVE_LEND = "INSERT INTO user.user (name, email, password) VALUES ('%s','%s','%s')";
+	private static final String QUERY_GET_ALL_BOOKS = "SELECT u.* FROM books_lend.books AS u";
+	private static final String QUERY_SAVE_LEND = "INSERT INTO books_lend.books (book, name, email, date) VALUES ('%s','%s','%s','%tF')";
+	private static final String QUERY_GET_BOOK_BY_TITLE = "SELECT u.* FROM books_lend.books AS u WHERE u.book = ?1" ;
+
 	
 	@PersistenceContext
 	EntityManager entityManager;
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public LendBooks getBook() {
-		Query query = entityManager.createNativeQuery(QUERY_GET_EXPIRED, User.class);
+	public List<LendBooks> getBook() {
+		Query query = entityManager.createNativeQuery(QUERY_GET_ALL_BOOKS, LendBooks.class);
 		return query.getResultList();
 	}
 
@@ -34,6 +36,18 @@ public class CustomRepositoryImpl implements CustomRepository {
 		Query query = entityManager.createNativeQuery(String.format(QUERY_SAVE_LEND, lb.getBookName(), lb.getName(), lb.getEmailAddress(), lb.getLendDate()), LendBooks.class);
 		query.executeUpdate();
 		return lb;
+	}
+
+	@Override
+	public LendBooks getBookByTitle(String title) {
+		Query query = entityManager.createNativeQuery(QUERY_GET_BOOK_BY_TITLE, LendBooks.class);
+		query.setParameter(1, title);
+		try{
+			return (LendBooks) query.getSingleResult();
+		}catch (NoResultException nre){
+			//Ignore this because as per your logic this is ok!
+		}
+		return null;
 	}
 
 }

@@ -6,6 +6,7 @@ import com.lendingmanagement.model.LendBooks;
 
 public interface CustomRepository {
 
-	public LendBooks getBook();
+	public List<LendBooks> getBook();
 	public LendBooks saveLend(LendBooks lb);
+	public LendBooks getBookByTitle(String title);
 }
