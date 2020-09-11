@@ -1,0 +1,70 @@
+/* =============================================================================
+ *
+ * @(#) login.css
+
+ *
+ * Copyright (c) Naval Group SA property, (2019), all rights reserved.
+ *
+ * Both the content and the form of this software are the property of Naval Group SA and/or of third party.
+ * It is formally prohibited to use, copy, modify, translate, disclose or perform all or
+ * part of this software without obtaining Naval Group SA’s prior written consent or authorization.
+ * Any such unauthorized use,copying, modification, translation, disclosure or performance by any means
+ * whatsoever shall constitute an infringement punishable by criminal or civil law and, more generally, a breach of
+ * Naval Group SA’s rights.
+ * ============================================================================= */
+.vertical-center
+{
+  min-height:100%;
+  min-height:100vh; 
+  display:flex;
+  align-items:center;
+}
+
+body
+{
+  background-image:linear-gradient(to bottom,rgba(0,0,0,0),rgba(0,0,0,0.5));
+}
+
+.well
+{
+  background-color:rgb(34,34,34);
+}
+
+img
+{
+  width:70%;
+  length:70%;
+  display:block;
+  margin:auto;
+}
+
+.btn-primary.active
+{
+  color:rgba(216,87,0, 0.75);
+}
+.btn-primary
+{
+  background-color:#d85700;
+  background-image:-moz-linear-gradient(top, #d85700, #b85700);
+  background-image:-webkit-gradient(linear, 0 0, 0 100%, from(#d85700), to(#b85700));
+  background-image:-webkit-linear-gradient(top, #d85700, #b85700 );
+  background-image:-o-linear-gradient(top, #d85700, #b85700);
+  background-image:linear-gradient(to bottom, #d85700, #b85700);
+  border-color:#d85700 #d85700 #d85700;
+  *background-color:#d85700;
+}
+
+.btn-primary:hover,.btn-primary:focus,.btn-primary:active,.btn-primary.active,.btn-primary.disabled,.btn-primary[disabled]
+{
+  background-color:#b85700;
+  *background-color:#d85700;
+}
+.btn-primary:active,.btn-primary.active
+{
+  background-color:#d85700 \9;
+}
+
+.btn-group.open .btn-primary.dropdown-toggle
+{
+  background-color:#d85700;
+}
