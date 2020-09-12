@@ -20,6 +20,9 @@ Les données sont stockées dans une base de donnée mySQL
 La base de données contient tous les livres empruntés sous la forme *id, titre du livre, utilisateur, adresse mail, date d'emprunt*  
 Une fois que la date d'emprunt est dépassée de 30 jours, toute, les indormations sont fournis via la requête **get expired books**
 
+## Requêtes d'envoi d'un emprunt
+  curl -X POST -H "Content-type: application/json" -d '{"book":"NOM_DU_LIVRE","name":"NOM","email":"EMAIL"}'http://localhost:8080/saveLend
+
 ## Equipe
 
 Lucas Greck, Bastien Gucciardo et Nicolas Petit
