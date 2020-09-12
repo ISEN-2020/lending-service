@@ -1,7 +1,7 @@
 # How to create the lending-service MySQL DataBase
 
 ## Create the DataBase
-	CREATE DATABASE book_lend;
+	CREATE DATABASE books_lend;
 
 ## Create the Table
 	CREATE TABLE books (
