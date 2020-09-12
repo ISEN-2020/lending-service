@@ -10,6 +10,6 @@ FROM gcr.io/distroless/java:11
 
 WORKDIR /app
 
-COPY --from=MAVEN_BUILD /build/target/user-management-1.0.0.jar /app/
+COPY --from=MAVEN_BUILD /build/target/lending_management-1.0.0.jar /app/
 
-ENTRYPOINT ["java", "-jar", "user-management-1.0.0.jar"]
+ENTRYPOINT ["java", "-jar", "lending_management-1.0.0.jar"]
