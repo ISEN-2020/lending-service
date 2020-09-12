@@ -28,7 +28,6 @@ public class LendBooks {
 
 
 	public LendBooks() {
-
 	}
 
 	public LendBooks( String book, String name, String emailAddress) {
