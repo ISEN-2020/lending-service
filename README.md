@@ -1,8 +1,25 @@
 # lending-service
-## Ajout test de Lucas
+
+## Description
+
+Service de gestion des livres empruntés
   
-## Ajout test de Nicolas  
+## Fonctionnalitées  
 
-## Ajout test de Bastien
+* **Get expired books** : Renvoie la liste des livres empruntés dont la date de retour est dépassée, avec le nom de l'utilisateur et son adresse email
+* **Save lend** : Ajoute dans la base de donnée un livre emprunté avec le nom de l'utilisateur, son adresse mail et la date d'emprunt
+* **Delete book** : Supprime une entrée dans la base
 
-Ceci est un test
+## Technologie
+
+Le service est développé en java et utilise le framework [Spring Boot](https://spring.io/projects/spring-boot)  
+Les données sont stockées dans une base de donnée mySQL
+
+## Base de données
+
+La base de données contient tous les livres empruntés sous la forme *id, titre du livre, utilisateur, adresse mail, date d'emprunt*  
+Une fois que la date d'emprunt est dépassée de 30 jours, toute, les indormations sont fournis via la requête **get expired books**
+
+## Equipe
+
+Lucas Greck, Bastien Gucciardo et Nicolas Petit
