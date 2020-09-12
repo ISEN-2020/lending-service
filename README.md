@@ -26,6 +26,9 @@ Une fois que la date d'emprunt est dépassée de 30 jours, toute, les indormatio
 ## Requêtes d'envoi d'un retour
     curl -X POST -H "Content-type: application/json" -d '{"book" : "Nom_du_livre" }' http://localhost:8080/deleteBook
 
+## Requêtes d'envoi des livres non retournés
+    http://localhost:8080/getBookExpired
+
 ## Equipe
 
 Lucas Greck, Bastien Gucciardo et Nicolas Petit
