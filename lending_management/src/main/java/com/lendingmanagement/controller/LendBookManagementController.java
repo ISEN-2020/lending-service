@@ -41,7 +41,7 @@ public class LendBookManagementController {
 		return lendBooksDao.deleteBookByTitle(title.getBook());
 	}
 
-	@RequestMapping(path = "/getBookExpired", method = RequestMethod.POST, produces=MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(path = "/getBookExpired", method = RequestMethod.GET)
 	public @ResponseBody List<LendBooks> getBookExpired() { return lendBooksDao.getBookExpired(); }
 
 }
