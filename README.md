@@ -23,6 +23,9 @@ Une fois que la date d'emprunt est dépassée de 30 jours, toute, les indormatio
 ## Requêtes d'envoi d'un emprunt
     curl -X POST -H "Content-type: application/json" -d '{"book":"NOM_DU_LIVRE","name":"NOM","email":"EMAIL"}'http://localhost:8080/saveLend
 
+## Requêtes d'envoi d'un retour
+    curl -X POST -H "Content-type: application/json" -d '{"book" : "Nom_du_livre" }' http://localhost:8080/deleteBook
+
 ## Equipe
 
 Lucas Greck, Bastien Gucciardo et Nicolas Petit
