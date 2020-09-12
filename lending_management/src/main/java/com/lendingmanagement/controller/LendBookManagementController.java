@@ -3,6 +3,7 @@ package com.lendingmanagement.controller;
 
 import com.lendingmanagement.dao.LendBooksDao;
 import com.lendingmanagement.model.LendBooks;
+import com.lendingmanagement.model.PostString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -11,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
+import java.text.SimpleDateFormat;
 
 @Controller
 public class LendBookManagementController {
@@ -27,14 +28,20 @@ public class LendBookManagementController {
 	
 	@RequestMapping(path = "/saveLend", method = RequestMethod.POST, produces=MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody LendBooks saveLend(@RequestBody LendBooks lb) {
-		System.out.println("ON PASSE DANS CONTROLLER");
 		return lendBooksDao.saveLend(lb);
 	}
 	
-	@RequestMapping(path = "/deleteUser", method = RequestMethod.POST, produces=MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody LendBooks deleteUser(String title) {
-		LendBooks bookToDelete = lendBooksDao.getBookByTitle(title);
-		lendBooksDao.deleteInBatch(Arrays.asList(bookToDelete));
-		return bookToDelete;
+	@RequestMapping(path = "/deleteBook", method = RequestMethod.POST, produces=MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody LendBooks deleteBook(@RequestBody PostString title) {
+		//LendBooks bookToDelete = lendBooksDao.getBookByTitle(poststring.getBook());
+		//System.out.println(bookToDelete.getBook());
+		//lendBooksDao.delete(bookToDelete);//.deleteInBatch(Arrays.asList(bookToDelete));
+		//lendBooksDao.flush();
+		//return bookToDelete;
+		return lendBooksDao.deleteBookByTitle(title.getBook());
 	}
+
+	@RequestMapping(path = "/getBookExpired", method = RequestMethod.POST, produces=MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody List<LendBooks> getBookExpired() { return lendBooksDao.getBookExpired(); }
+
 }

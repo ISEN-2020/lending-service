@@ -13,7 +13,7 @@ public class LendBooks {
 	private int id;
 
 	@Column(name="book", columnDefinition = "VARCHAR(100)")
-	private String bookname;
+	private String book;
 
 	@Column(name="name", columnDefinition = "VARCHAR(40)")
 	private String name;
@@ -30,26 +30,24 @@ public class LendBooks {
 
 	}
 
-	public LendBooks(String name, String emailAddress, String password) {
+	public LendBooks( String book, String name, String emailAddress) {
 		this.name=name;
 		this.emailAddress=emailAddress;
+		this.book=book;
 	}
 	
 	public int getId() {
 		return this.id;
 	}
 
-	public String getBookName() {
-		return this.bookname;
+	public String getBook() {
+		return this.book;
 	}
 	public String getName() {
 		return this.name;
 	}
 	public String getEmailAddress() {
 		return this.emailAddress;
-	}
-	public Date getLendDate() {
-		return this.lendDate;
 	}
 
 }
