@@ -2,6 +2,7 @@ package com.lendingmanagement.model;
 
 
 import javax.persistence.*;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Entity
@@ -48,6 +49,9 @@ public class LendBooks {
 	}
 	public String getEmailAddress() {
 		return this.emailAddress;
+	}
+	public Date getDate(){
+		return this.lendDate;
 	}
 
 }
