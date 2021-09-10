@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
+import java.io.DataOutputStream;
 import java.text.SimpleDateFormat;
 
 @Controller
@@ -23,20 +24,21 @@ public class LendBookManagementController {
 	public @ResponseBody List<LendBooks> getBook() {
 		return lendBooksDao.getBook();
 	}
-	
+	//lendbook
 	@RequestMapping(path = "/saveLend", method = RequestMethod.POST, produces=MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody LendBooks saveLend(@RequestBody LendBooks lb) {
 		return lendBooksDao.saveLend(lb);
 	}
-	
+	//returnbook
 	@RequestMapping(path = "/deleteBook", method = RequestMethod.POST, produces=MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody LendBooks deleteBook(@RequestBody PostString title) {
+	public @ResponseBody LendBooks returnBooks(@RequestBody LendBooks lb) {
 		//LendBooks bookToDelete = lendBooksDao.getBookByTitle(poststring.getBook());
 		//System.out.println(bookToDelete.getBook());
 		//lendBooksDao.delete(bookToDelete);//.deleteInBatch(Arrays.asList(bookToDelete));
 		//lendBooksDao.flush();
 		//return bookToDelete;
-		return lendBooksDao.deleteBookByTitle(title.getBook());
+
+		return lendBooksDao.returnBook(lb);
 	}
 
 	@RequestMapping(path = "/getBookExpired", method = RequestMethod.GET)
