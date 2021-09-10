@@ -35,7 +35,7 @@ public class CustomRepositoryImpl implements CustomRepository {
 	@Override
 	@Transactional
 	public LendBooks saveLend(LendBooks lb) {
-        Query query = entityManager.createNativeQuery(String.format(QUERY_COUNT_NAME,lb.getName(),lb.getQuantities()), LendBooks.class);
+        Query query = entityManager.createNativeQuery(String.format(QUERY_COUNT_NAME,lb.getName(),lb.getQuantitites()), LendBooks.class);
         if(query.getSingleResult() == null)
 			return null;	
 
@@ -72,4 +72,6 @@ public class CustomRepositoryImpl implements CustomRepository {
 		Query query = entityManager.createNativeQuery(QUERY_GET_BOOK_EXPIRED, LendBooks.class);
 		return query.getResultList();
 	}
+
+	
 }
