@@ -3,10 +3,10 @@ name: Build docker image
 on:
   push:
     branches:
-    - features/guillval
+    - master
 
 jobs:
-
+  
   build:
  
     runs-on: ubuntu-latest
