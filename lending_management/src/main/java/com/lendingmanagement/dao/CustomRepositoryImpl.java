@@ -15,7 +15,7 @@ import org.springframework.stereotype.Repository;
 public class CustomRepositoryImpl implements CustomRepository {
 
 	private static final String QUERY_GET_ALL_BOOKS = "SELECT u.* FROM books_lend.books AS u";
-	private static final String QUERY_SAVE_LEND = "INSERT INTO books_lend.books (book, name, email, date) VALUES ('%s','%s','%s',NOW())";
+	private static final String QUERY_SAVE_LEND = "INSERT INTO books_lend.books (id,book, name, email, date) VALUES (%d,'%s','%s','%s',NOW())";// CHANGE _ Ajout id 
 	private static final String QUERY_GET_BOOK_BY_TITLE = "SELECT u.* FROM books_lend.books AS u WHERE u.book = ?1" ;
 	private static final String QUERY_DELETE_BOOK = "DELETE FROM books_lend.books AS u WHERE u.id=%s";//return=book
 	private static final String QUERY_GET_BOOK_EXPIRED = "SELECT u.* FROM books_lend.books AS u WHERE  NOW() > DATE_ADD(u.date , INTERVAL 30 DAY)" ;
@@ -34,7 +34,7 @@ public class CustomRepositoryImpl implements CustomRepository {
 	@Override
 	@Transactional
 	public LendBooks saveLend(LendBooks lb) {
-		Query query = entityManager.createNativeQuery(String.format(QUERY_SAVE_LEND, lb.getBook(), lb.getName(), lb.getEmailAddress()), LendBooks.class);
+		Query query = entityManager.createNativeQuery(String.format(QUERY_SAVE_LEND,lb.getId(), lb.getBook(), lb.getName(), lb.getEmailAddress()), LendBooks.class);
 		query.executeUpdate();
 		return lb;
 	}
