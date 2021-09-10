@@ -3,7 +3,8 @@ name: Build docker image
 on:
   push:
     branches:
-    - master
+    - master, features/guillval, Teddy, feature/yanis_side
+  pull_request:
 
 jobs:
   
