@@ -1,7 +1,7 @@
 FROM maven:3.6.3-openjdk-14-slim AS MAVEN_BUILD	
 
-COPY lending_management/pom.xml /build/
-COPY lending_management/src /build/src/
+COPY ./pom.xml /build/
+COPY ./src /build/src/
 WORKDIR /build/						
 
 RUN mvn package spring-boot:repackage
