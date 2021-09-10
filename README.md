@@ -7,7 +7,7 @@ Service de gestion des livres empruntés
 ## Fonctionnalitées  
 
 * **Get expired books** : Renvoie la liste des livres empruntés dont la date de retour est dépassée, avec le nom de l'utilisateur et son adresse email
-* **Save lend** : Ajoute dans la base de donnée un livre emprunté avec le nom de l'utilisateur, son adresse mail et la date d'emprunt SI le nombre de livre disponible est inferieur au nombre de livre emprunté
+* **Save lend** : Ajoute dans la base de donnée un livre emprunté avec le nom de l'utilisateur, son adresse mail et la date d'emprunt SI le nombre de livre disponible est superieur au nombre de livre emprunté
 * **Delete book** : Supprime une entrée dans la base
 
 ## Technologie
