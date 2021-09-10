@@ -23,20 +23,21 @@ public class LendBookManagementController {
 	public @ResponseBody List<LendBooks> getBook() {
 		return lendBooksDao.getBook();
 	}
-	
+	//lendbook
 	@RequestMapping(path = "/saveLend", method = RequestMethod.POST, produces=MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody LendBooks saveLend(@RequestBody LendBooks lb) {
 		return lendBooksDao.saveLend(lb);
 	}
-	
+	//returnbook
 	@RequestMapping(path = "/deleteBook", method = RequestMethod.POST, produces=MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody LendBooks deleteBook(@RequestBody PostString title) {
+	public @ResponseBody LendBooks deleteBook(@RequestBody PostString ID) {
 		//LendBooks bookToDelete = lendBooksDao.getBookByTitle(poststring.getBook());
 		//System.out.println(bookToDelete.getBook());
 		//lendBooksDao.delete(bookToDelete);//.deleteInBatch(Arrays.asList(bookToDelete));
 		//lendBooksDao.flush();
 		//return bookToDelete;
-		return lendBooksDao.deleteBookByTitle(title.getBook());
+
+		return lendBooksDao.deleteBookByTitle(ID.getBook());
 	}
 
 	@RequestMapping(path = "/getBookExpired", method = RequestMethod.GET)

@@ -19,7 +19,6 @@ public class PostString {
 
 
 	public String getBook() {
-		System.out.println("ok for getBook");
 		return this.book;
 	}
 }
