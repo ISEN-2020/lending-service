@@ -25,6 +25,8 @@ public class LendBooks {
 	@Column(name="date", columnDefinition = "DATE")
 	private Date lendDate;
 
+	private int quantites;
+
 
 
 	public LendBooks() {
@@ -51,6 +53,10 @@ public class LendBooks {
 	}
 	public Date getDate(){
 		return this.lendDate;
+	}
+
+	public int getQuantitites(){
+		return this.quantites;
 	}
 
 }
