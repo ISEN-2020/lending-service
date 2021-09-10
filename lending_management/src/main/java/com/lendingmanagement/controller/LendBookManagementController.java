@@ -30,14 +30,14 @@ public class LendBookManagementController {
 	}
 	//returnbook
 	@RequestMapping(path = "/deleteBook", method = RequestMethod.POST, produces=MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody LendBooks deleteBook(@RequestBody LendBooks lb) {
+	public @ResponseBody LendBooks returnBooks(@RequestBody LendBooks lb) {
 		//LendBooks bookToDelete = lendBooksDao.getBookByTitle(poststring.getBook());
 		//System.out.println(bookToDelete.getBook());
 		//lendBooksDao.delete(bookToDelete);//.deleteInBatch(Arrays.asList(bookToDelete));
 		//lendBooksDao.flush();
 		//return bookToDelete;
 
-		return lendBooksDao.deleteBookByTitle(lb);
+		return lendBooksDao.returnBook(lb);
 	}
 
 	@RequestMapping(path = "/getBookExpired", method = RequestMethod.GET)

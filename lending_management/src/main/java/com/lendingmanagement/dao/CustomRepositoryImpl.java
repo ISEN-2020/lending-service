@@ -54,7 +54,7 @@ public class CustomRepositoryImpl implements CustomRepository {
 
 	@Override
 	@Transactional    // represente reutnBook _ ajout d'une requete vers book management pour set available book by ID
-	public LendBooks deleteBookByTitle(LendBooks lb) {  
+	public LendBooks returnBook(LendBooks lb) {  
 		Query query = entityManager.createNativeQuery(String.format(QUERY_DELETE_BOOK, lb.getBook() , lb.getName(), LendBooks.class));
 		query.executeUpdate();
 		// Send set available to book management DB 
