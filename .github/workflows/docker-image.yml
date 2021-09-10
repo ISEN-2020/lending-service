@@ -4,9 +4,14 @@ on:
   push:
     branches:
     - master
+    - 'features/guillval'
+    - 'feature/yanis_side'
+    - 'Teddy'
+
+  pull_request:
 
 jobs:
-
+  
   build:
  
     runs-on: ubuntu-latest
