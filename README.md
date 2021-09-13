@@ -15,6 +15,8 @@ Service de gestion des livres empruntés
 Le service est développé en java et utilise le framework [Spring Boot](https://spring.io/projects/spring-boot)  
 Les données sont stockées dans une base de donnée mySQL
 
+Update 2k21 - Ajout de l'outil Sonarcloud 
+
 ## Base de données
 
 La base de données contient tous les livres empruntés sous la forme *id, titre du livre, utilisateur, adresse mail, date d'emprunt*  
