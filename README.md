@@ -35,3 +35,5 @@ Une fois que la date d'emprunt est dépassée de 30 jours, toute, les indormatio
 ## Equipe
 
 Lucas Greck, Bastien Gucciardo et Nicolas Petit
+
+Updated by yanis_side, Teddy and guillval on September the 10th 2021
