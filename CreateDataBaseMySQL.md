@@ -1,6 +1,5 @@
-# This step is useless if Docker is started with docker-compose
-
 # How to create the lending-service MySQL DataBase
+This step is useless if Docker is started with docker-compose
 
 ## Create the DataBase
 	CREATE DATABASE books_lend;
