@@ -34,6 +34,7 @@ Une fois que la date d'emprunt est dépassée de 30 jours, toute, les indormatio
 ## Commande de lancement du docker
 	docker-compose up
  Il est également possible d'utiliser la commande suivante pour démarrer uniquement le lending-service :
+ 
 	docker run -e MYSQL_DB_HOST=jdbc:mysql://192.168.56.1:3306/books_lend?serverTimezone=UTC -e MYSQL_DB_USERNAME=root -e MYSQL_DB_PASSWORD=root lending-service
 
 ## Equipe
