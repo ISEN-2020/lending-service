@@ -20,7 +20,7 @@ services:
   lending-service:    
     image: lucasgreck/lending-service
     ports:      
-      - "8089:8080"
+      - "8088:8080"
     environment: 
       - MYSQL_DB_HOST=jdbc:mysql://mysql-development:3306/books_lend?serverTimezone=UTC
       - MYSQL_DB_USERNAME=root
