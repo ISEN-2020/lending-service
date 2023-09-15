@@ -23,13 +23,13 @@ La base de données contient tous les livres empruntés sous la forme *id, titre
 Une fois que la date d'emprunt est dépassée de 30 jours, toute, les indormations sont fournis via la requête **get expired books**
 
 ## Requêtes d'envoi d'un emprunt
-    curl -X POST -H "Content-type: application/json" -d '{"book":"NOM_DU_LIVRE","name":"NOM","email":"EMAIL"}'http://localhost:8080/saveLend
+    curl -X POST -H "Content-type: application/json" -d '{"book":"NOM_DU_LIVRE","name":"NOM","email":"EMAIL"}'http://localhost:8088/saveLend
 
 ## Requêtes d'envoi d'un retour
-    curl -X POST -H "Content-type: application/json" -d '{"book" : "Nom_du_livre" }' http://localhost:8080/deleteBook
+    curl -X POST -H "Content-type: application/json" -d '{"book" : "Nom_du_livre" }' http://localhost:8088/deleteBook
 
 ## Requêtes d'envoi des livres non retournés
-    http://localhost:8080/getBookExpired
+    http://localhost:8088/getBookExpired
 
 ## Commande de lancement du docker
 	docker-compose up
