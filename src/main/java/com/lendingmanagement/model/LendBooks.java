@@ -25,6 +25,7 @@ public class LendBooks {
 	@Column(name="date", columnDefinition = "DATE")
 	private Date lendDate;
 
+    @Column(name="quantites", columnDefinition = "SMALLINT")
 	private int quantites;
 
 
