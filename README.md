@@ -32,7 +32,7 @@ Une fois que la date d'emprunt est dépassée de 30 jours, toute, les indormatio
     http://localhost:8080/getBookExpired
 
 ## Commande de lancement du docker
-	docker run -e MYSSQL_DB_HOST=jdbc:mysql://192.168.56.1:3306/books_lend?serverTimezone=UTC -e MYSQL_DB_USERNAME=root -e MYSQL_DB_PASSWORD=root lending-service
+	docker run -e MYSQL_DB_HOST=jdbc:mysql://192.168.56.1:3306/books_lend?serverTimezone=UTC -e MYSQL_DB_USERNAME=root -e MYSQL_DB_PASSWORD=root lending-service
 
 ## Equipe
 
