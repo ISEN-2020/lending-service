@@ -5,8 +5,8 @@ FROM python:3.12.5
 WORKDIR /app
 
 # Copy package.json and install dependencies
-COPY package.json ./
-RUN pip install Django==5.1.1
+COPY requirements.txt .
+RUN pip install -r requirements.txt
 
 COPY . .
 
