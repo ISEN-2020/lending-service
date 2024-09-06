@@ -8,6 +8,8 @@ WORKDIR /app
 COPY package.json ./
 RUN pip install Django==5.1.1
 
+COPY manage.py .
+
 
 EXPOSE 8000
 
