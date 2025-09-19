@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -138,20 +137,6 @@ def get_expired_books(request):
     
     serializer = LendingSerializer(expired_lendings, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
-
-@api_view(['POST'])
-def create_lending(request):
-    """Endpoint existant maintenu pour compatibilité"""
-    serializer = LendingSerializer(data=request.data)
-    if serializer.is_valid():
-        serializer.save()
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
-    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-@api_view(['GET'])
-def expired_lendings(request):
-    """Endpoint existant maintenu pour compatibilité - redirige vers get_expired_books"""
-    return get_expired_books(request)
 
 @api_view(['GET'])
 def health_check(request):
