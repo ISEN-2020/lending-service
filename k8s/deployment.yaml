@@ -29,9 +29,12 @@ spec:
       serviceAccountName: lending-service-sa
       automountServiceAccountToken: false
       containers:
-      - name: lending-service
+      - name: lending-service 
         image: lending-service:v1.0.0  # Version spécifique au lieu de 'latest'
         imagePullPolicy: IfNotPresent
+        resources:
+        requests:
+          ephemeral-storage: "2Gi"
         ports:
         - containerPort: 8000
           name: http
