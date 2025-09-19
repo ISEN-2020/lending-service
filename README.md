@@ -2,7 +2,7 @@
 
 Ce microservice fait partie d'un système de bibliothèque distribué et gère les opérations d'emprunt et de retour de livres.
 
-## 🏗️ Architecture
+##  Architecture
 
 Le service s'intègre dans une architecture microservices comprenant :
 - **Book Management** : Gestion des livres et de leur disponibilité
@@ -10,7 +10,7 @@ Le service s'intègre dans une architecture microservices comprenant :
 - **Notification System** : Envoi de notifications
 - **Lending Management** : Gestion des prêts (ce service)
 
-## 🚀 Fonctionnalités
+##  Fonctionnalités
 
 ### Endpoints Principaux
 
@@ -21,15 +21,15 @@ Le service s'intègre dans une architecture microservices comprenant :
 
 ### Fonctionnalités Avancées
 
-- ✅ Communication inter-microservices via HTTP
-- ✅ Gestion des transactions pour la cohérence des données
-- ✅ Notifications automatiques lors des emprunts/retours
-- ✅ Suivi des livres en retard
-- ✅ Health checks pour Kubernetes
-- ✅ Logging structuré
-- ✅ Configuration via variables d'environnement
+-  Communication inter-microservices via HTTP
+-  Gestion des transactions pour la cohérence des données
+-  Notifications automatiques lors des emprunts/retours
+-  Suivi des livres en retard
+-  Health checks pour Kubernetes
+-  Logging structuré
+-  Configuration via variables d'environnement
 
-## 🛠️ Technologies Utilisées
+## Technologies Utilisées
 
 - **Framework** : Django + Django REST Framework
 - **Base de données** : SQLite (dev) / PostgreSQL (prod)
@@ -38,7 +38,7 @@ Le service s'intègre dans une architecture microservices comprenant :
 - **Client HTTP** : Requests
 - **Serveur WSGI** : Gunicorn
 
-## 📦 Installation et Configuration
+## Installation et Configuration
 
 ### Développement Local
 
@@ -106,7 +106,7 @@ chmod +x deploy.sh
 | `NOTIFICATION_SERVICE_URL` | URL du service de notifications | `http://localhost:8003` |
 | `LOG_LEVEL` | Niveau de log | `INFO` |
 
-## 📊 API Documentation
+## API Documentation
 
 ### Emprunter un livre
 
@@ -166,7 +166,7 @@ GET /getExpiredBooks/
 ]
 ```
 
-## 🔄 Communication Inter-Microservices
+## Communication Inter-Microservices
 
 Le service communique avec :
 
@@ -180,7 +180,7 @@ Le service communique avec :
 ### Notification Service
 - `POST /send-notification` - Envoyer des notifications par email
 
-## 🐳 Docker
+## Docker
 
 ### Dockerfile Optimisé
 
@@ -198,7 +198,7 @@ Le fichier `docker-compose.yml` inclut :
 - Réseau isolé
 - Volumes persistants
 
-## ☸️ Kubernetes
+## Kubernetes
 
 ### Ressources Déployées
 
@@ -215,7 +215,7 @@ Le fichier `docker-compose.yml` inclut :
 - **Readiness Probe** : Vérifie que le service est prêt
 - **Startup Probe** : Vérifie le démarrage initial
 
-## 📝 Logging
+## Logging
 
 Les logs sont configurés avec plusieurs niveaux :
 - **ERROR** : Erreurs critiques
@@ -227,7 +227,7 @@ Les logs sont envoyés vers :
 - Console (pour Kubernetes)
 - Fichiers rotatifs (pour persistance)
 
-## 🔒 Sécurité
+## Sécurité
 
 - Variables d'environnement pour les secrets
 - Utilisateur non-root dans Docker
@@ -235,7 +235,7 @@ Les logs sont envoyés vers :
 - HTTPS forcé en production
 - Headers de sécurité configurés
 
-## 🧪 Tests
+## Tests
 
 ```bash
 # Tests unitaires
@@ -245,7 +245,7 @@ python manage.py test
 docker-compose -f docker-compose.test.yml up --abort-on-container-exit
 ```
 
-## 🚀 Déploiement en Production
+## Déploiement en Production
 
 1. **Construire l'image pour la production**
 ```bash
@@ -265,14 +265,14 @@ sed -i 's/lending-service:latest/your-registry\/lending-service:v1.0.0/g' k8s/de
 ./k8s/deploy.sh
 ```
 
-## 📈 Monitoring
+## Monitoring
 
 Le service expose des métriques pour :
 - Prometheus (endpoint `/metrics` si configuré)
 - Health checks (`/health/`)
 - Logs structurés pour aggregation
 
-## 🤝 Contribution
+## Contribution
 
 1. Fork le projet
 2. Créer une branche feature (`git checkout -b feature/AmazingFeature`)
@@ -280,7 +280,7 @@ Le service expose des métriques pour :
 4. Push vers la branche (`git push origin feature/AmazingFeature`)
 5. Ouvrir une Pull Request
 
-## 📄 Licence
+## Licence
 
 Ce projet est sous licence MIT. Voir le fichier `LICENSE` pour plus de détails.
 
@@ -305,3 +305,4 @@ Exemple de comment configurer la connexion de notre BDD
 
     3. Utilisation des endpoints API
 Exemple de requete pour chaque endpoint
+
