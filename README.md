@@ -86,7 +86,7 @@ chmod +x deploy.sh
 ./deploy.sh
 ```
 
-## 🔧 Configuration
+## Configuration
 
 ### Variables d'Environnement
 
@@ -305,4 +305,5 @@ Exemple de comment configurer la connexion de notre BDD
 
     3. Utilisation des endpoints API
 Exemple de requete pour chaque endpoint
+
 
