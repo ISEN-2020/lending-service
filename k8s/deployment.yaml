@@ -26,9 +26,11 @@ spec:
         prometheus.io/port: "8000"
         prometheus.io/path: "/metrics"
     spec:
+      serviceAccountName: lending-service-sa
+      automountServiceAccountToken: false
       containers:
       - name: lending-service
-        image: lending-service:latest
+        image: lending-service:v1.0.0  # Version spécifique au lieu de 'latest'
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8000

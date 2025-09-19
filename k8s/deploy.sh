@@ -25,6 +25,12 @@ kubectl apply -f configmap.yaml
 echo "🔐 Déploiement du Secret..."
 kubectl apply -f secret.yaml
 
+echo "👤 Déploiement du RBAC (ServiceAccount, Role, RoleBinding)..."
+kubectl apply -f rbac.yaml
+
+echo "💾 Déploiement du stockage persistant..."
+kubectl apply -f pvc.yaml
+
 echo "🌐 Déploiement des NetworkPolicies..."
 kubectl apply -f networkpolicy.yaml
 
