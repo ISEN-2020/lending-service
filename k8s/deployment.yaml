@@ -33,8 +33,11 @@ spec:
         image: lending-service:v1.0.0  # Version spécifique au lieu de 'latest'
         imagePullPolicy: IfNotPresent
         ports:
-        - containerPort: 8000
+        - containerPort: 80
           name: http
+          protocol: TCP
+        - containerPort: 443
+          name: https
           protocol: TCP
         
         # Variables d'environnement depuis ConfigMap

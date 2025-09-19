@@ -1,12 +1,13 @@
 version: '3.8'
 
 services:
-  # Service Lending Management
+  # Service Lending Management avec Nginx + HTTPS
   lending-service:
     build: .
     container_name: lending-service
     ports:
-      - "8000:8000"
+      - "80:80"      # HTTP (redirige vers HTTPS)
+      - "443:443"    # HTTPS
     environment:
       - DJANGO_DEBUG=True
       - DJANGO_SECRET_KEY=django-insecure-development-only
@@ -15,12 +16,10 @@ services:
       - BOOK_MANAGEMENT_URL=http://book-management:8001
       - USER_MANAGEMENT_URL=http://user-management:8002
       - NOTIFICATION_SERVICE_URL=http://notification-service:8003
+      - DJANGO_ALLOWED_HOSTS=localhost,127.0.0.1,lending-service
     volumes:
       - .:/app
-      - sqlite_data:/app/db.sqlite3
-    command: >
-      sh -c "python manage.py migrate &&
-             python manage.py runserver 0.0.0.0:8000"
+      - ./nginx/ssl:/etc/nginx/ssl:ro  # Certificats SSL
     depends_on:
       - book-management
       - user-management
@@ -28,6 +27,11 @@ services:
     networks:
       - library-network
     restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "-k", "https://localhost/health/", "||", "exit", "1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
 
   # Mock Book Management Service (pour le développement)
   book-management:

@@ -31,11 +31,17 @@ kubectl apply -f rbac.yaml
 echo "💾 Déploiement du stockage persistant..."
 kubectl apply -f pvc.yaml
 
+echo "🔒 Création du secret TLS pour HTTPS..."
+./create-tls-secret.sh
+
 echo "🌐 Déploiement des NetworkPolicies..."
 kubectl apply -f networkpolicy.yaml
 
 echo "🚢 Déploiement du Service..."
 kubectl apply -f service.yaml
+
+echo "🌍 Déploiement de l'Ingress HTTPS..."
+kubectl apply -f ingress.yaml
 
 echo "🖥️  Déploiement du Deployment..."
 kubectl apply -f deployment.yaml

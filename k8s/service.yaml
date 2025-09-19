@@ -13,8 +13,12 @@ spec:
     app: lending-service
   ports:
   - name: http
-    port: 8000
-    targetPort: 8000
+    port: 80
+    targetPort: 80
+    protocol: TCP
+  - name: https
+    port: 443
+    targetPort: 443
     protocol: TCP
   type: ClusterIP
   sessionAffinity: None
@@ -33,8 +37,12 @@ spec:
     app: lending-service
   ports:
   - name: http
-    port: 8000
-    targetPort: 8000
+    port: 80
+    targetPort: 80
+    protocol: TCP
+  - name: https
+    port: 443
+    targetPort: 443
     protocol: TCP
   type: ClusterIP
   clusterIP: None  # Service headless pour service discovery
