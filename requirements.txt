@@ -1,2 +1,18 @@
+# Framework Django
 Django>=5.1.1
 djangorestframework>=3.15.2
+
+# Client HTTP pour communiquer avec les microservices
+requests>=2.31.0
+
+# Base de données PostgreSQL (optionnel, remplace SQLite en production)
+psycopg2-binary>=2.9.7
+
+# Serveur WSGI pour la production
+gunicorn>=21.2.0
+
+# Variables d'environnement
+python-decouple>=3.8
+
+# Logging et monitoring
+django-extensions>=3.2.3
