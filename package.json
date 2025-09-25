@@ -1,0 +1,20 @@
+{
+  "name": "library-management-api",
+  "version": "1.0.0",
+  "description": "A Django API for managing book loans in a library",
+  "main": "manage.py",
+  "scripts": {
+    "start": "python manage.py runserver",
+    "migrate": "python manage.py migrate",
+    "test": "python manage.py test"
+  },
+  "dependencies": {
+    "django": "4.2",
+    "djangorestframework": "3.14.0"
+  },
+  "engines": {
+    "python": ">=3.9"
+  },
+  "author": "Your Name",
+  "license": "MIT"
+}

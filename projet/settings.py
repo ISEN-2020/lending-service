@@ -10,7 +10,6 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
-import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -21,26 +20,18 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# Génération d'une clé sécurisée si pas de variable d'environnement
-import secrets
-import string
-
-def generate_secret_key():
-    """Génère une clé secrète Django sécurisée"""
-    chars = string.ascii_letters + string.digits + '!@#$%^&*(-_=+)'
-    return ''.join(secrets.choice(chars) for _ in range(50))
-
-SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY') or generate_secret_key()
+SECRET_KEY = 'django-insecure-nsn%n(o3fegmh_2(pb6464h++s)zg+agq3as8p$#y-c7i1bx&-'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DJANGO_DEBUG', 'True').lower() in ['true', '1', 'on']
+DEBUG = True
 
-ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',')
+ALLOWED_HOSTS = ["*"]  # Dev/K8s: accepte les hosts du cluster (à restreindre en prod)
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -48,10 +39,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'lending',
     'rest_framework',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -81,33 +74,15 @@ TEMPLATES = [
 WSGI_APPLICATION = 'projet.wsgi.application'
 
 
-# Database configuration with environment variables support
+# Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-DATABASE_ENGINE = os.environ.get('DATABASE_ENGINE', 'django.db.backends.sqlite3')
-
-if DATABASE_ENGINE == 'django.db.backends.postgresql':
-    DATABASES = {
-        'default': {
-            'ENGINE': DATABASE_ENGINE,
-            'NAME': os.environ.get('DATABASE_NAME', 'lending_db'),
-            'USER': os.environ.get('DATABASE_USER', 'lending_user'),
-            'PASSWORD': os.environ.get('DATABASE_PASSWORD', 'lending_password'),
-            'HOST': os.environ.get('DATABASE_HOST', 'localhost'),
-            'PORT': os.environ.get('DATABASE_PORT', '5432'),
-            'OPTIONS': {
-                'connect_timeout': 20,
-            },
-        }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
-else:
-    # SQLite par défaut pour le développement
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': os.environ.get('DATABASE_NAME', str(BASE_DIR / 'db.sqlite3')),
-        }
-    }
+}
 
 
 # Password validation
@@ -132,9 +107,12 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
 
-LANGUAGE_CODE = 'fr-fr'
-TIME_ZONE = 'Europe/Paris'
+LANGUAGE_CODE = 'en-us'
+
+TIME_ZONE = 'UTC'
+
 USE_I18N = True
+
 USE_TZ = True
 
 
@@ -142,80 +120,22 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = 'static/'
-STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# REST Framework configuration
+# Allow CORS from local frontend (customer-ui)
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:3000',
+    'http://127.0.0.1:3000',
+]
+
+# DRF: disable SessionAuthentication to avoid CSRF for API calls from the frontend in dev
 REST_FRAMEWORK = {
-    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 20,
-    'DEFAULT_RENDERER_CLASSES': [
-        'rest_framework.renderers.JSONRenderer',
-    ],
-    'DEFAULT_PARSER_CLASSES': [
-        'rest_framework.parsers.JSONParser',
+    'DEFAULT_AUTHENTICATION_CLASSES': [],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny',
     ],
 }
-
-# Microservices URLs configuration
-BOOK_MANAGEMENT_URL = os.environ.get('BOOK_MANAGEMENT_URL', 'http://localhost:8001')
-USER_MANAGEMENT_URL = os.environ.get('USER_MANAGEMENT_URL', 'http://localhost:8002')
-NOTIFICATION_SERVICE_URL = os.environ.get('NOTIFICATION_SERVICE_URL', 'http://localhost:8003')
-
-# Logging configuration
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'formatters': {
-        'verbose': {
-            'format': '{levelname} {asctime} {module} {process:d} {thread:d} {message}',
-            'style': '{',
-        },
-        'simple': {
-            'format': '{levelname} {message}',
-            'style': '{',
-        },
-    },
-    'handlers': {
-        'console': {
-            'class': 'logging.StreamHandler',
-            'formatter': 'verbose',
-        },
-        'file': {
-            'class': 'logging.handlers.RotatingFileHandler',
-            'filename': 'logs/lending-service.log',
-            'maxBytes': 1024*1024*10,  # 10 MB
-            'backupCount': 5,
-            'formatter': 'verbose',
-        },
-    },
-    'loggers': {
-        'lending': {
-            'handlers': ['console', 'file'],
-            'level': os.environ.get('LOG_LEVEL', 'INFO'),
-            'propagate': False,
-        },
-        'django': {
-            'handlers': ['console'],
-            'level': 'INFO',
-            'propagate': False,
-        },
-    },
-    'root': {
-        'handlers': ['console'],
-        'level': 'WARNING',
-    },
-}
-
-# Sécurité pour la production
-if not DEBUG:
-    SECURE_SSL_REDIRECT = True
-    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-    SESSION_COOKIE_SECURE = True
-    CSRF_COOKIE_SECURE = True
-    SECURE_BROWSER_XSS_FILTER = True
-    SECURE_CONTENT_TYPE_NOSNIFF = True
