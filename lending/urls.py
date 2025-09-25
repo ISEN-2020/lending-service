@@ -1,8 +1,12 @@
 from django.urls import path
-from .views import create_lending, expired_lendings, user_borrowings
+from .views import lend_book, return_book, get_expired_books, health_check
 
 urlpatterns = [
-    path('create-lending/', create_lending, name='create_lending'),
-    path('expired-lendings/', expired_lendings, name='expired_lendings'),
-    path('lendings/by_user/', user_borrowings, name='user_borrowings'),
+    # Health check pour Kubernetes
+    path('health/', health_check, name='health_check'),
+    
+    # Endpoints principaux de l'API
+    path('lendBook/', lend_book, name='lend_book'),
+    path('returnBook/', return_book, name='return_book'),
+    path('getExpiredBooks/', get_expired_books, name='get_expired_books'),
 ]

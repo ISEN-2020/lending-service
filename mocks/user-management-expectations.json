@@ -1,0 +1,25 @@
+[
+  {
+    "httpRequest": {
+      "method": "GET",
+      "path": "/users/.*",
+      "pathParameters": {
+        "email": ["[^/]+"]
+      }
+    },
+    "httpResponse": {
+      "statusCode": 200,
+      "headers": {
+        "Content-Type": ["application/json"]
+      },
+      "body": {
+        "email": "user@example.com",
+        "first_name": "John",
+        "last_name": "Doe",
+        "active": true,
+        "registration_date": "2024-01-15",
+        "subscription_type": "premium"
+      }
+    }
+  }
+]

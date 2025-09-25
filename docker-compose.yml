@@ -1,0 +1,81 @@
+version: '3.8'
+
+services:
+  # Service Lending Management avec Nginx + HTTPS
+  lending-service:
+    build: .
+    container_name: lending-service
+    ports:
+      - "80:80"      # HTTP (redirige vers HTTPS)
+      - "443:443"    # HTTPS
+    environment:
+      - DJANGO_DEBUG=True
+      - DJANGO_SECRET_KEY=django-insecure-development-only
+      - DATABASE_ENGINE=django.db.backends.sqlite3
+      - DATABASE_NAME=/app/db.sqlite3
+      - BOOK_MANAGEMENT_URL=http://book-management:8001
+      - USER_MANAGEMENT_URL=http://user-management:8002
+      - NOTIFICATION_SERVICE_URL=http://notification-service:8003
+      - DJANGO_ALLOWED_HOSTS=localhost,127.0.0.1,lending-service
+    volumes:
+      - .:/app
+      - ./nginx/ssl:/etc/nginx/ssl:ro  # Certificats SSL
+    depends_on:
+      - book-management
+      - user-management
+      - notification-service
+    networks:
+      - library-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "-k", "https://localhost/health/", "||", "exit", "1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Mock Book Management Service (pour le développement)
+  book-management:
+    image: mockserver/mockserver:5.15.0
+    container_name: book-management-mock
+    ports:
+      - "8001:1080"
+    environment:
+      - MOCKSERVER_PROPERTY_FILE=/config/mockserver.properties
+      - MOCKSERVER_INITIALIZATION_JSON_PATH=/config/book-management-expectations.json
+    volumes:
+      - ./mocks/book-management-expectations.json:/config/book-management-expectations.json
+    networks:
+      - library-network
+
+  # Mock User Management Service (pour le développement)
+  user-management:
+    image: mockserver/mockserver:5.15.0
+    container_name: user-management-mock
+    ports:
+      - "8002:1080"
+    environment:
+      - MOCKSERVER_INITIALIZATION_JSON_PATH=/config/user-management-expectations.json
+    volumes:
+      - ./mocks/user-management-expectations.json:/config/user-management-expectations.json
+    networks:
+      - library-network
+
+  # Mock Notification Service (pour le développement)
+  notification-service:
+    image: mockserver/mockserver:5.15.0
+    container_name: notification-service-mock
+    ports:
+      - "8003:1080"
+    environment:
+      - MOCKSERVER_INITIALIZATION_JSON_PATH=/config/notification-service-expectations.json
+    volumes:
+      - ./mocks/notification-service-expectations.json:/config/notification-service-expectations.json
+    networks:
+      - library-network
+
+volumes:
+  sqlite_data:
+
+networks:
+  library-network:
+    driver: bridge
